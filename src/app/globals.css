@@ -174,3 +174,83 @@ body {
 .recharts-polar-grid-angle line,
 .recharts-polar-grid-concentric line { stroke: rgba(255,255,255,0.04) !important; }
 .recharts-radar-polygon { stroke: rgba(53,208,127,0.2) !important; fill: rgba(53,208,127,0.04) !important; }
+
+/* ══════════════════════════════════════════
+   LIQUID GLASS — diagnosis page only
+   ══════════════════════════════════════════ */
+.lq-glass {
+  background: rgba(255,255,255,0.01);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.08);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+.lq-glass::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: inherit; padding: 1.4px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.1) 20%,
+    rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+    rgba(255,255,255,0.1) 80%, rgba(255,255,255,0.35) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none;
+}
+.lq-glass-strong {
+  background: rgba(255,255,255,0.015);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.05), inset 0 1px 1px rgba(255,255,255,0.12);
+  position: relative; overflow: hidden;
+}
+.lq-glass-strong::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: inherit; padding: 1.4px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.18) 20%,
+    rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+    rgba(255,255,255,0.18) 80%, rgba(255,255,255,0.45) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none;
+}
+.lq-input {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.lq-input:focus-within {
+  border-color: rgba(53,208,127,0.35);
+  background: rgba(53,208,127,0.03);
+}
+.lq-btn {
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+.lq-btn:hover {
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+}
+.lq-btn-accent {
+  border: 1px solid rgba(53,208,127,0.3);
+  color: var(--accent-green);
+  background: rgba(53,208,127,0.04);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+.lq-btn-accent:hover {
+  border-color: rgba(53,208,127,0.5);
+  background: rgba(53,208,127,0.1);
+}
+.lq-selected {
+  border-color: rgba(53,208,127,0.45) !important;
+  background: rgba(53,208,127,0.06) !important;
+  box-shadow: 0 0 20px rgba(53,208,127,0.06) !important;
+}

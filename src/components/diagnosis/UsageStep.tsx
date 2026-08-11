@@ -86,10 +86,10 @@ export default function UsageStep({ selected, onChange }: UsageStepProps) {
             <motion.button
               key={w.id}
               onClick={() => toggle(w.id)}
-              className={`relative text-left p-[clamp(22px,3vw,36px)] rounded-[14px] border transition-all duration-250 ease-out overflow-hidden
+              className={`relative text-left p-[clamp(22px,3vw,36px)] rounded-[16px] transition-all duration-300 ease-out overflow-hidden lq-glass
                 ${isSelected
-                  ? "border-[var(--accent-green)] bg-[rgba(53,208,127,0.06)] shadow-[0_0_24px_rgba(53,208,127,0.06)]"
-                  : "border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] hover:border-[rgba(255,255,255,0.15)] hover:bg-[rgba(255,255,255,0.04)]"
+                  ? "lq-selected"
+                  : "hover:border-[rgba(255,255,255,0.15)]"
                 }`}
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
