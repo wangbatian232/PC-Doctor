@@ -15,6 +15,7 @@ import CursorProvider from "@/components/shared/CursorProvider";
 import BackgroundSystem from "@/components/shared/BackgroundSystem";
 import Navbar from "@/components/landing/Navbar";
 import HeroSection from "@/components/landing/HeroSection";
+import FeatureGrid from "@/components/landing/FeatureGrid";
 import ProductDemo from "@/components/landing/ProductDemo";
 import BottleneckShowcase from "@/components/landing/BottleneckShowcase";
 import GameShowcase from "@/components/landing/GameShowcase";
@@ -89,6 +90,7 @@ export default function Home() {
           <BackgroundSystem />
           <Navbar onStartDiagnosis={sd} />
           <HeroSection onStartDiagnosis={sd} onViewExample={le} />
+          <FeatureGrid />
           <ProductDemo />
           <BottleneckShowcase />
           <GameShowcase />
