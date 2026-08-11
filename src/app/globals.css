@@ -7,9 +7,9 @@
 
 :root {
   /* ── Surface ── */
-  --bg-void: #07090C;
+  --bg-void: #0A0C0B;
   --bg-panel: #0B0E13;
-  --bg-card: #10141A;
+  --bg-card: #141917;
   --bg-glass: rgba(255,255,255,0.025);
 
   /* ── Borders ── */
@@ -17,16 +17,16 @@
   --border-default: rgba(255,255,255,0.08);
 
   /* ── Typography ── */
-  --text-primary: #F2F4F7;
-  --text-secondary: #8B929E;
-  --text-tertiary: #5E646D;
+  --text-primary: #F4F6F5;
+  --text-secondary: #8B948F;
+  --text-tertiary: #565D59;
   --text-placeholder: #434850;
 
   /* ── Accent ── */
-  --accent-green: #35D07F;
-  --accent-green-hover: #2DB86E;
-  --accent-green-dim: rgba(53,208,127,0.08);
-  --accent-green-glow: rgba(53,208,127,0.10);
+  --accent-green: #39E991;
+  --accent-green-hover: #2ECC71;
+  --accent-green-dim: rgba(57,233,145,0.08);
+  --accent-green-glow: rgba(57,233,145,0.10);
 
   /* ── Status ── */
   --status-warning: #F5B942;

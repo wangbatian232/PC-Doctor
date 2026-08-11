@@ -147,24 +147,24 @@ export default function Home() {
               </div>
               <div className="flex justify-between mt-8 max-w-lg mx-auto">
                 <button onClick={() => setStep(Math.max(0, step - 1))}
-                  className={`px-5 py-2.5 rounded-[8px] text-[13px] font-medium transition-all duration-200
+                  className={`px-5 py-2.5 rounded-[999px] text-[13px] font-medium transition-all duration-200
                     ${step === 0
                       ? "invisible"
-                      : "border border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-visible)]"}`}>
+                      : "border border-[rgba(255,255,255,0.1)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.03)]"}`}>
                   上一步
                 </button>
                 {step < 6 ? (
                   <button onClick={() => setStep(step + 1)}
                     disabled={!(step === 0 ? usage.length > 0 : step === 1 ? cpu !== null : step === 6 ? monitor !== null : true)}
-                    className="px-6 py-2.5 rounded-[8px] text-[13px] font-semibold transition-all duration-200
-                      border border-[rgba(255,255,255,0.15)] text-[var(--text-primary)] hover:border-[var(--border-visible)] hover:bg-[rgba(255,255,255,0.04)] active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed">
+                    className="px-6 py-2.5 rounded-[999px] text-[13px] font-semibold transition-all duration-200
+                      border border-[rgba(255,255,255,0.15)] text-[var(--text-primary)] hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.05)] active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed">
                     下一步
                   </button>
                 ) : (
                   <button onClick={() => { const sel: HardwareSelection = { cpu, gpu, ram, ssd, psu, monitor, usage }; const s = computeScores(sel); const b = analyzeBottleneck(sel); setResult({ scores: s, bottleneck: b, gamePredictions: predictAllGames(sel), upgrades: generateUpgradeSuggestions(sel), summary: scoreLabel(s.overall), selection: sel }); cv("scanning"); }}
                     disabled={!monitor}
-                    className="px-6 py-2.5 rounded-[8px] text-[13px] font-semibold transition-all duration-200
-                      border border-[rgba(53,208,127,0.35)] text-[var(--accent-green)] hover:bg-[rgba(53,208,127,0.08)] hover:border-[rgba(53,208,127,0.5)] active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2">
+                    className="px-6 py-2.5 rounded-[999px] text-[13px] font-semibold transition-all duration-200
+                      border border-[var(--accent-green)] text-[var(--accent-green)] hover:bg-[var(--accent-green-dim)] active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2">
                     开始诊断 →
                   </button>
                 )}
