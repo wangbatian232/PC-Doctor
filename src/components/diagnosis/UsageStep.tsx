@@ -89,23 +89,23 @@ export default function UsageStep({ selected, onChange }: UsageStepProps) {
       style={{ fontFamily: '"Noto Sans SC", system-ui, sans-serif' }}
     >
       {/* Section head */}
-      <div className="text-center mb-10">
-        <span className="text-[10px] tracking-[0.15em] uppercase text-[#2FD671] font-medium mb-4 block"
+      <div className="flex flex-col items-center text-center pt-14 pb-12">
+        <span className="text-[10px] tracking-[0.4em] uppercase text-[#2FD671] font-medium mb-4 block"
           style={{ fontFamily: '"JetBrains Mono", monospace' }}>
-          STEP 01 / CONFIGURATION
+          STEP 01 / SCENARIO
         </span>
         <h2 className="text-[clamp(28px,3.5vw,44px)] font-black text-[#F2F5F3] tracking-[-0.03em] leading-[1.12] mb-3"
           style={{ fontFamily: '"Noto Sans SC", system-ui, sans-serif' }}>
           这台电脑的<br /><span className="text-[#2FD671]">主要用途是？</span>
         </h2>
-        <p className="text-[14px] text-[#9AA6A0] max-w-[480px] mx-auto leading-relaxed"
+        <p className="text-sm text-[#9AA6A0] max-w-xl mx-auto leading-relaxed mt-5"
           style={{ fontFamily: '"Noto Sans SC", system-ui, sans-serif' }}>
           选择您最关注的场景，PC Doctor 将据此评估您的硬件配置
         </p>
       </div>
 
       {/* 2×2 Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
         {workloads.map((w, i) => {
           const isSel = selected.includes(w.id);
           const PrimaryIcon = w.primary.icon;
@@ -195,6 +195,28 @@ export default function UsageStep({ selected, onChange }: UsageStepProps) {
             </motion.button>
           );
         })}
+      </div>
+
+      {/* Next step button */}
+      <div className="flex justify-center mt-12">
+        <button
+          disabled={selected.length === 0}
+          className={`min-h-[44px] px-8 py-3 rounded-full border text-sm font-medium transition-all duration-200 flex items-center gap-2
+            ${selected.length > 0
+              ? "border-[#2FD671] text-[#2FD671] hover:bg-[rgba(47,214,113,0.1)] hover:shadow-[0_0_16px_rgba(47,214,113,0.15)] cursor-pointer"
+              : "border-white/10 text-[#5F6B66] cursor-not-allowed"
+            }`}
+          style={{ fontFamily: '"JetBrains Mono", monospace', letterSpacing: "0.2em", textTransform: "uppercase" }}
+        >
+          下一步
+          <motion.span
+            className="inline-block"
+            animate={{ x: selected.length > 0 ? 4 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            →
+          </motion.span>
+        </button>
       </div>
     </motion.div>
   );
