@@ -36,25 +36,22 @@ const cardAccents: Record<string, string> = {
   "elden-ring": "rgba(140,170,180,0.06)",
 };
 
-/* ── Stat row with stagger ── */
-function Stat({ label, value, suffix, delay, color }: {
+/* ── Perf column: centered, equal width ── */
+function PerfCol({ label, value, suffix = "", delay, color }: {
   label: string; value: number; suffix?: string; delay: number; color?: string;
 }) {
   return (
     <motion.div
-      className="p-5 rounded-[10px] border border-[var(--border-subtle)] bg-[rgba(255,255,255,0.015)]"
-      initial={{ opacity: 0, y: 10 }}
+      className="flex flex-col items-center justify-center text-center py-[clamp(20px,3vw,36px)] px-2"
+      initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ delay, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
     >
-      <p className="t-label mb-2">{label}</p>
-      <p
-        className="t-number tabular-nums"
-        style={{ color: color ?? "var(--text-primary)", fontSize: value >= 200 ? "clamp(40px,5vw,72px)" : undefined }}
-      >
-        <AnimatedCounter to={value} duration={600} suffix={suffix ?? ""} />
+      <p className="text-[clamp(24px,2.5vw,40px)] font-semibold tabular-nums text-white leading-none"
+        style={{ color: color ?? "white" }}>
+        <AnimatedCounter to={value} duration={500} suffix={suffix} />
       </p>
-      <p className="t-label mt-1" style={{ textTransform: "none" }}>{suffix ? suffix.replace("%", "") : (label.includes("FPS") ? "FPS" : label.includes("GPU") ? "负载" : "GB")}</p>
+      <p className="text-[10px] tracking-[0.1em] font-medium text-white/35 mt-2 uppercase">{label}</p>
     </motion.div>
   );
 }
@@ -145,7 +142,7 @@ export default function GameShowcase() {
         </motion.div>
 
         {/* Performance panel — game image as full background */}
-        <div className="glass overflow-hidden relative min-h-[400px]">
+        <div className="glass overflow-hidden relative">
           {/* Game image background — covers entire panel */}
           <AnimatePresence mode="wait">
             <motion.div
@@ -154,23 +151,24 @@ export default function GameShowcase() {
               initial={{ opacity: 0, scale: 1.04 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.03 }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
               <motion.div
                 className="absolute inset-0"
                 initial={{ scale: 1 }}
-                animate={{ scale: 1.04 }}
+                animate={{ scale: 1.03 }}
                 transition={{ duration: 10, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
               >
                 <img
                   src={`/images/game-${selected.id}.jpg`}
                   alt=""
                   className="w-full h-full object-cover"
-                  style={{ filter: "blur(8px) brightness(0.25)" }}
+                  style={{ filter: "blur(4px) brightness(0.30)" }}
                 />
               </motion.div>
+              {/* Gradient: top lighter for title, bottom darker for stats */}
               <div className="absolute inset-0"
-                style={{ background: "linear-gradient(180deg, rgba(7,9,12,0.7) 0%, rgba(7,9,12,0.3) 50%, rgba(7,9,12,0.8) 100%)" }}
+                style={{ background: "linear-gradient(180deg, rgba(7,9,12,0.35) 0%, rgba(7,9,12,0.2) 30%, rgba(7,9,12,0.55) 70%, rgba(7,9,12,0.85) 100%)" }}
               />
             </motion.div>
           </AnimatePresence>
@@ -179,7 +177,7 @@ export default function GameShowcase() {
           {analyzing && (
             <motion.div
               className="absolute left-0 right-0 h-[1px] pointer-events-none z-20"
-              style={{ background: "linear-gradient(90deg, transparent, rgba(53,208,127,0.25), transparent)" }}
+              style={{ background: "linear-gradient(90deg, transparent, rgba(53,208,127,0.2), transparent)" }}
               initial={{ top: 0 }}
               animate={{ top: "100%" }}
               transition={{ duration: 0.5, ease: "easeIn" }}
@@ -187,23 +185,31 @@ export default function GameShowcase() {
           )}
 
           {/* Content overlaid on image */}
-          <div className="relative z-10 grid md:grid-cols-[minmax(280px,1fr)_1fr] h-full">
-            {/* Left: Game info */}
-            <div className="flex flex-col justify-end p-[clamp(24px,3vw,48px)]">
+          <div className="relative z-10 flex flex-col min-h-[420px]">
+            {/* ── Top: Game title (centered, prominent) ── */}
+            <div className="flex-1 flex flex-col items-center justify-center pt-[clamp(40px,5vw,64px)] pb-4">
+              {/* Title glow */}
+              <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[60%] h-[40%] pointer-events-none"
+                style={{ background: "radial-gradient(ellipse at center, rgba(255,255,255,0.06), transparent 70%)" }}
+              />
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={selected.id + "-info"}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  key={selected.id + "-title"}
+                  className="text-center"
+                  initial={{ opacity: 0, filter: "blur(6px)", y: 8 }}
+                  animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                  exit={{ opacity: 0, filter: "blur(6px)", y: -8 }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <h3 className="text-[clamp(24px,2.2vw,36px)] font-bold text-white mb-2">{selected.name}</h3>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[12px] text-white/50 bg-[rgba(0,0,0,0.3)] px-2.5 py-1 rounded-[4px] backdrop-blur-sm">{selected.res}</span>
-                    <span className="text-[12px] text-white/50 bg-[rgba(0,0,0,0.3)] px-2.5 py-1 rounded-[4px] backdrop-blur-sm">{selected.settings}</span>
+                  <h3 className="text-[clamp(32px,3.5vw,48px)] font-bold text-white tracking-[0.02em] mb-2">
+                    {selected.name}
+                  </h3>
+                  <div className="flex items-center justify-center gap-2">
+                    <span className="text-[12px] text-white/45 tracking-[0.1em] font-medium">{selected.res}</span>
+                    <span className="text-[10px] text-white/25">·</span>
+                    <span className="text-[12px] text-white/45 tracking-[0.1em] font-medium">{selected.settings}</span>
                     {analyzing && (
-                      <motion.span className="t-mono text-[var(--accent-green)] ml-2" initial={{ opacity: 0 }} animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 0.8, repeat: Infinity }}>
+                      <motion.span className="t-mono text-[var(--accent-green)] ml-3" initial={{ opacity: 0 }} animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 0.8, repeat: Infinity }}>
                         ANALYZING...
                       </motion.span>
                     )}
@@ -212,28 +218,16 @@ export default function GameShowcase() {
               </AnimatePresence>
             </div>
 
-            {/* Right: Performance stats */}
-            <div className="p-[clamp(24px,3vw,48px)] flex items-center">
-              <div className="grid grid-cols-2 gap-3 w-full">
-                <Stat
-                  key={selected.id + "-fps"}
-                  label="平均帧率" value={selected.fps} delay={0}
-                  color={selected.fps >= 100 ? "#35D07F" : selected.fps >= 60 ? "#F5B942" : "#FF5C5C"}
-                />
-                <Stat key={selected.id + "-low"} label="1% 低帧" value={selected.low} delay={0.06} />
-                <Stat key={selected.id + "-gpu"} label="GPU 占用" value={selected.gpu} suffix="%" delay={0.12} />
-                <motion.div
-                  key={selected.id + "-vram"}
-                  className="p-5 rounded-[10px] border border-[rgba(255,255,255,0.08)] bg-[rgba(0,0,0,0.3)] backdrop-blur-sm"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.18, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <p className="t-label mb-2" style={{ color: "rgba(255,255,255,0.5)" }}>显存占用</p>
-                  <p className="text-[clamp(28px,3.5vw,48px)] font-bold text-white tabular-nums">{selected.vram}</p>
-                  <p className="t-label mt-1" style={{ textTransform: "none", color: "rgba(255,255,255,0.4)" }}>GB</p>
-                </motion.div>
-              </div>
+            {/* ── Bottom: 4 equal performance columns ── */}
+            <div
+              className="grid grid-cols-4 divide-x divide-[rgba(255,255,255,0.06)] border-t border-[rgba(255,255,255,0.06)]"
+              style={{ background: "rgba(0,0,0,0.3)", backdropFilter: "blur(4px)" }}
+            >
+              <PerfCol key={selected.id + "-fps"} label="AVG FPS" value={selected.fps} delay={0}
+                color={selected.fps >= 100 ? "#35D07F" : selected.fps >= 60 ? "#F5B942" : "#FF5C5C"} />
+              <PerfCol key={selected.id + "-low"} label="LOW FPS" value={selected.low} delay={0.08} />
+              <PerfCol key={selected.id + "-gpu"} label="GPU USAGE" value={selected.gpu} delay={0.16} suffix="%" />
+              <PerfCol key={selected.id + "-vram"} label="VRAM" value={parseFloat(selected.vram)} delay={0.24} suffix=" GB" />
             </div>
           </div>
         </div>
