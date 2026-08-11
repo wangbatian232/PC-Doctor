@@ -145,7 +145,7 @@ export default function GameShowcase() {
         </motion.div>
 
         {/* Performance panel */}
-        <div className="glass overflow-hidden">
+        <div className="glass overflow-hidden relative">
           {/* Scan line on analyze */}
           {analyzing && (
             <motion.div
@@ -157,75 +157,72 @@ export default function GameShowcase() {
             />
           )}
 
-          <div className="grid md:grid-cols-[300px_1fr]">
-            {/* Left: Game cover */}
-            <div className="relative flex items-center justify-center bg-[rgba(0,0,0,0.35)] p-[clamp(20px,3vw,40px)] overflow-hidden">
+          <div className="grid md:grid-cols-[minmax(300px,1fr)_1fr]">
+            {/* Left: Full game image background */}
+            <div className="relative min-h-[350px] md:min-h-[500px] overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={selected.id + "-img"}
-                  className="w-[clamp(140px,14vw,200px)]"
-                  initial={{ opacity: 0, scale: 1.06, filter: "blur(6px)" }}
-                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, scale: 1.04, filter: "blur(4px)" }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  key={selected.id + "-bg"}
+                  className="absolute inset-0"
+                  initial={{ opacity: 0, scale: 1.04 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.03 }}
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <div className="aspect-[3/4] rounded-[8px] overflow-hidden shadow-2xl relative">
+                  {/* Ken Burns slow zoom */}
+                  <motion.div
+                    className="absolute inset-0"
+                    initial={{ scale: 1 }}
+                    animate={{ scale: 1.04 }}
+                    transition={{ duration: 10, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+                  >
                     <img
                       src={`/images/game-${selected.id}.jpg`}
                       alt={selected.name}
                       className="w-full h-full object-cover"
+                      style={{ filter: "blur(2px) brightness(0.35)" }}
                     />
-                    {/* Gradient overlay for readability */}
-                    <div className="absolute inset-0"
-                      style={{ background: "linear-gradient(to top, rgba(7,9,12,0.5) 0%, transparent 40%)" }} />
-                  </div>
+                  </motion.div>
+                  {/* Gradient overlays */}
+                  <div className="absolute inset-0"
+                    style={{
+                      background: `
+                        linear-gradient(180deg, rgba(7,9,12,0.6) 0%, rgba(7,9,12,0.15) 40%, rgba(7,9,12,0.7) 100%),
+                        linear-gradient(90deg, rgba(7,9,12,0.5) 0%, transparent 50%)
+                      `
+                    }}
+                  />
                 </motion.div>
               </AnimatePresence>
+
+              {/* Game info overlaid on image */}
+              <div className="absolute inset-0 flex flex-col justify-end p-[clamp(24px,3vw,48px)] z-10">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={selected.id + "-info"}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <h3 className="text-[clamp(28px,2.5vw,40px)] font-bold text-white mb-2">{selected.name}</h3>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-[12px] text-white/60 bg-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-[4px] backdrop-blur-sm">{selected.res}</span>
+                      <span className="text-[12px] text-white/60 bg-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-[4px] backdrop-blur-sm">{selected.settings}</span>
+                      <span className="text-[10px] tracking-[0.1em] font-medium text-white/40">{selected.tag}</span>
+                    </div>
+                    {analyzing && (
+                      <motion.span className="t-mono text-[var(--accent-green)]" initial={{ opacity: 0 }} animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 0.8, repeat: Infinity }}>
+                        ANALYZING...
+                      </motion.span>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
 
             {/* Right: Performance data */}
             <div className="p-[clamp(24px,3vw,48px)] flex flex-col justify-center">
-              {/* Game name — float transition */}
-              <div className="mb-2 overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={selected.id + "-name"}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <h3 className="t-heading text-[var(--text-primary)]">{selected.name}</h3>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* Res + Settings + Analyzing */}
-              <div className="flex items-center gap-3 mb-6">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={selected.id + "-meta"}
-                    className="flex items-center gap-2"
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.25, delay: 0.05 }}
-                  >
-                    <span className="text-[11px] text-[var(--text-tertiary)] bg-[rgba(255,255,255,0.04)] px-2.5 py-1 rounded-[4px]">{selected.res}</span>
-                    <span className="text-[11px] text-[var(--text-tertiary)] bg-[rgba(255,255,255,0.04)] px-2.5 py-1 rounded-[4px]">{selected.settings}</span>
-                  </motion.div>
-                </AnimatePresence>
-                {analyzing && (
-                  <motion.span
-                    className="t-mono text-[var(--accent-green)]"
-                    initial={{ opacity: 0 }} animate={{ opacity: [0.4, 1, 0.4] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                  >
-                    ANALYZING...
-                  </motion.span>
-                )}
-              </div>
-
               {/* Stats grid — staggered */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <Stat
