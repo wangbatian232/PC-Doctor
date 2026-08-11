@@ -14,7 +14,7 @@ const improvements = [
 
 export default function UpgradeShowcase() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.2 });
+  const inView = useInView(ref, { once: false, amount: 0.05 });
 
   return (
     <section ref={ref} id="ch05" className="section-chapter page-container bg-void">

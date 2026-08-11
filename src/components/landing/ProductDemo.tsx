@@ -23,7 +23,7 @@ const scores = [
 
 export default function ProductDemo() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.2 });
+  const inView = useInView(ref, { once: false, amount: 0.05 });
 
   return (
     <section ref={ref} id="ch02" className="section-chapter page-container bg-panel">

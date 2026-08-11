@@ -8,7 +8,7 @@ import { AlertTriangle, CheckCircle } from "lucide-react";
 
 export default function BottleneckShowcase() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.2 });
+  const inView = useInView(ref, { once: false, amount: 0.05 });
 
   return (
     <section ref={ref} id="ch03" className="section-chapter page-container bg-void">

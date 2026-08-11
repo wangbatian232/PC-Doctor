@@ -13,16 +13,16 @@ interface ScrollRevealProps {
 }
 
 export default function ScrollReveal({
-  children, className, delay = 0, direction = "up", duration = 0.55, once = false
+  children, className, delay = 0, direction = "up", duration = 0.8, once = false
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once, margin: "-80px" });
+  const isInView = useInView(ref, { once, margin: "120px" });
 
   const dirMap = {
-    up: { y: 28 },
-    down: { y: -28 },
-    left: { x: 28 },
-    right: { x: -28 },
+    up: { y: 40 },
+    down: { y: -40 },
+    left: { x: 40 },
+    right: { x: -40 },
   };
 
   return (
