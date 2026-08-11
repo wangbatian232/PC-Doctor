@@ -20,42 +20,39 @@ export default function BackgroundSystem({
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Layer 0: Reveal image — visible only near cursor */}
-      {revealImage && isDesktop && (
-        <div className="absolute inset-0">
-          <img
-            src={revealImage}
-            alt=""
-            className="w-full h-full object-cover"
-            style={{
-              // The image is always there, but masked by a radial gradient at cursor position
-              maskImage: `radial-gradient(circle 280px at calc(var(--cursor-x) * 100%) calc(var(--cursor-y) * 100%), black 0%, black 30%, transparent 50%)`,
-              WebkitMaskImage: `radial-gradient(circle 280px at calc(var(--cursor-x) * 100%) calc(var(--cursor-y) * 100%), black 0%, black 30%, transparent 50%)`,
-              opacity: isInside ? 0.5 : 0,
-              filter: "brightness(0.6)",
-              transition: "opacity 0.6s ease-out",
-            }}
-          />
-        </div>
-      )}
-
-      {/* Full dark veil over the image */}
+      {/* Layer 0: Reveal image — always faintly visible, cursor brightens */}
       {revealImage && (
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "var(--bg-void)",
-            // Cut a hole at cursor position to let the image show through
-            maskImage: isDesktop
-              ? `radial-gradient(circle 320px at calc(var(--cursor-x) * 100%) calc(var(--cursor-y) * 100%), transparent 0%, transparent 28%, black 45%)`
-              : "none",
-            WebkitMaskImage: isDesktop
-              ? `radial-gradient(circle 320px at calc(var(--cursor-x) * 100%) calc(var(--cursor-y) * 100%), transparent 0%, transparent 28%, black 45%)`
-              : "none",
-            opacity: isDesktop && isInside ? 1 : 0,
-            transition: "opacity 0.5s ease-out",
-          }}
-        />
+        <>
+          {/* Always-visible faint image */}
+          <div className="absolute inset-0">
+            <img
+              src={revealImage}
+              alt=""
+              className="w-full h-full object-cover"
+              style={{
+                opacity: 0.08,
+                filter: "brightness(0.4) saturate(0.3)",
+              }}
+            />
+          </div>
+          {/* Cursor-brightened spotlight on the image */}
+          {isDesktop && (
+            <div className="absolute inset-0">
+              <img
+                src={revealImage}
+                alt=""
+                className="w-full h-full object-cover"
+                style={{
+                  maskImage: `radial-gradient(circle 280px at calc(var(--cursor-x) * 100%) calc(var(--cursor-y) * 100%), black 0%, black 30%, transparent 55%)`,
+                  WebkitMaskImage: `radial-gradient(circle 280px at calc(var(--cursor-x) * 100%) calc(var(--cursor-y) * 100%), black 0%, black 30%, transparent 55%)`,
+                  opacity: isInside ? 0.45 : 0,
+                  filter: "brightness(0.7)",
+                  transition: "opacity 0.6s ease-out",
+                }}
+              />
+            </div>
+          )}
+        </>
       )}
 
       {/* Layer 1: radial 光晕 */}
