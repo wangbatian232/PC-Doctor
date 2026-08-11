@@ -89,7 +89,7 @@ export default function UsageStep({ selected, onChange }: UsageStepProps) {
       style={{ fontFamily: '"Noto Sans SC", system-ui, sans-serif' }}
     >
       {/* Section head */}
-      <header className="relative z-20 flex flex-col items-center text-center px-6 pt-14 pb-12">
+      <header className="relative z-20 flex flex-col items-center text-center px-6 pt-20 pb-12">
         <p className="font-mono text-[11px] tracking-[0.4em] text-[#2FD671]">
           STEP 01 / SCENARIO
         </p>
@@ -194,28 +194,6 @@ export default function UsageStep({ selected, onChange }: UsageStepProps) {
             </motion.button>
           );
         })}
-      </div>
-
-      {/* Next step button */}
-      <div className="flex justify-center mt-12">
-        <button
-          disabled={selected.length === 0}
-          className={`min-h-[44px] px-8 py-3 rounded-full border text-sm font-medium transition-all duration-200 flex items-center gap-2
-            ${selected.length > 0
-              ? "border-[#2FD671] text-[#2FD671] hover:bg-[rgba(47,214,113,0.1)] hover:shadow-[0_0_16px_rgba(47,214,113,0.15)] cursor-pointer"
-              : "border-white/10 text-[#5F6B66] cursor-not-allowed"
-            }`}
-          style={{ fontFamily: '"JetBrains Mono", monospace', letterSpacing: "0.2em", textTransform: "uppercase" }}
-        >
-          下一步
-          <motion.span
-            className="inline-block"
-            animate={{ x: selected.length > 0 ? 4 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            →
-          </motion.span>
-        </button>
       </div>
     </motion.div>
   );
