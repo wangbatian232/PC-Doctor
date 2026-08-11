@@ -89,20 +89,19 @@ export default function UsageStep({ selected, onChange }: UsageStepProps) {
       style={{ fontFamily: '"Noto Sans SC", system-ui, sans-serif' }}
     >
       {/* Section head */}
-      <div className="flex flex-col items-center text-center pt-14 pb-12">
-        <span className="text-[10px] tracking-[0.4em] uppercase text-[#2FD671] font-medium mb-4 block"
-          style={{ fontFamily: '"JetBrains Mono", monospace' }}>
+      <header className="relative z-20 flex flex-col items-center text-center px-6 pt-14 pb-12">
+        <p className="font-mono text-[11px] tracking-[0.4em] text-[#2FD671]">
           STEP 01 / SCENARIO
-        </span>
-        <h2 className="text-[clamp(28px,3.5vw,44px)] font-black text-[#F2F5F3] tracking-[-0.03em] leading-[1.12] mb-3"
-          style={{ fontFamily: '"Noto Sans SC", system-ui, sans-serif' }}>
-          这台电脑的<br /><span className="text-[#2FD671]">主要用途是？</span>
-        </h2>
-        <p className="text-sm text-[#9AA6A0] max-w-xl mx-auto leading-relaxed mt-5"
-          style={{ fontFamily: '"Noto Sans SC", system-ui, sans-serif' }}>
+        </p>
+        <h1 className="mt-4 text-4xl md:text-[44px] font-black leading-[1.15] text-[#F2F5F3]">
+          这台电脑的
+          <br />
+          <span className="text-[#2FD671]">主要用途是?</span>
+        </h1>
+        <p className="mt-5 text-sm leading-relaxed text-[#9AA6A0] max-w-xl">
           选择您最关注的场景，PC Doctor 将据此评估您的硬件配置
         </p>
-      </div>
+      </header>
 
       {/* 2×2 Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
