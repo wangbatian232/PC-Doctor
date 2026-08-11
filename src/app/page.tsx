@@ -112,7 +112,7 @@ export default function Home() {
   return (
     <CursorProvider>
       <main className="min-h-screen bg-void relative">
-        <BackgroundSystem />
+        <BackgroundSystem revealImage="/images/bg-reveal.jpg" />
         <nav className="fixed top-0 left-0 right-0 z-40 bg-[rgba(7,9,12,0.88)] backdrop-blur-xl border-b border-[var(--border-subtle)]">
           <div className="page-container h-14 flex items-center justify-between">
             <button onClick={() => { reset(); cv("home"); }}
