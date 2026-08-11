@@ -151,30 +151,6 @@ export default function UsageStep({ selected, onChange }: UsageStepProps) {
           );
         })}
       </div>
-
-      {/* Bottom bar — counts + big CTA */}
-      <motion.div
-        className="flex items-center justify-between gap-4"
-        initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-      >
-        <p className="text-[12px] text-[var(--text-tertiary)] tracking-[0.06em]">
-          {selected.length > 0 ? `已选择 ${selected.length} 个场景` : "请选择任务场景"}
-        </p>
-        <motion.div
-          className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-[8px] text-[14px] font-semibold transition-all duration-250
-            ${selected.length > 0
-              ? "border border-[rgba(53,208,127,0.4)] text-[var(--accent-green)] hover:bg-[rgba(53,208,127,0.08)] cursor-pointer"
-              : "border border-[rgba(255,255,255,0.06)] text-[var(--text-tertiary)] cursor-not-allowed"
-            }`}
-          whileHover={selected.length > 0 ? { scale: 1.02 } : {}}
-          whileTap={selected.length > 0 ? { scale: 0.97 } : {}}
-        >
-          确认并继续
-          <motion.span animate={{ x: selected.length > 0 ? 3 : 0, opacity: selected.length > 0 ? 1 : 0.3 }} transition={{ duration: 0.2 }}>
-            →
-          </motion.span>
-        </motion.div>
-      </motion.div>
     </motion.div>
   );
 }
