@@ -87,7 +87,7 @@ export default function Home() {
     return (
       <CursorProvider>
         <main className="bg-void relative">
-          <BackgroundSystem revealImage="/images/game-cs2.jpg" />
+          <BackgroundSystem revealImage="/images/bg-reveal.jpg" />
           <Navbar onStartDiagnosis={sd} />
           <HeroSection onStartDiagnosis={sd} onViewExample={le} />
           <FeatureGrid />

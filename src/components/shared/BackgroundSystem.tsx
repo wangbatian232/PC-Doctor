@@ -35,7 +35,7 @@ export default function BackgroundSystem({
               }}
             />
           </div>
-          {/* Cursor-brightened spotlight on the image */}
+          {/* Cursor-brightened spotlight — emboss effect */}
           {isDesktop && (
             <div className="absolute inset-0">
               <img
@@ -45,8 +45,8 @@ export default function BackgroundSystem({
                 style={{
                   maskImage: `radial-gradient(circle 280px at calc(var(--cursor-x) * 100%) calc(var(--cursor-y) * 100%), black 0%, black 30%, transparent 55%)`,
                   WebkitMaskImage: `radial-gradient(circle 280px at calc(var(--cursor-x) * 100%) calc(var(--cursor-y) * 100%), black 0%, black 30%, transparent 55%)`,
-                  opacity: isInside ? 0.45 : 0,
-                  filter: "brightness(0.7)",
+                  opacity: isInside ? 0.55 : 0,
+                  filter: "brightness(0.55) contrast(1.6) grayscale(0.7)",
                   transition: "opacity 0.6s ease-out",
                 }}
               />
