@@ -1,0 +1,122 @@
+[
+  {
+    "id": "ddr4-3200-16gb",
+    "name": "DDR4 3200MHz 16GB (2×8GB)",
+    "type": "DDR4",
+    "capacity": 16,
+    "speed": 3200,
+    "tier": 4,
+    "score": 50,
+    "priceUsd": 40
+  },
+  {
+    "id": "ddr4-3200-32gb",
+    "name": "DDR4 3200MHz 32GB (2×16GB)",
+    "type": "DDR4",
+    "capacity": 32,
+    "speed": 3200,
+    "tier": 5,
+    "score": 58,
+    "priceUsd": 65
+  },
+  {
+    "id": "ddr4-3600-16gb",
+    "name": "DDR4 3600MHz 16GB (2×8GB)",
+    "type": "DDR4",
+    "capacity": 16,
+    "speed": 3600,
+    "tier": 5,
+    "score": 55,
+    "priceUsd": 45
+  },
+  {
+    "id": "ddr4-3600-32gb",
+    "name": "DDR4 3600MHz 32GB (2×16GB)",
+    "type": "DDR4",
+    "capacity": 32,
+    "speed": 3600,
+    "tier": 6,
+    "score": 62,
+    "priceUsd": 70
+  },
+  {
+    "id": "ddr5-5200-16gb",
+    "name": "DDR5 5200MHz 16GB (2×8GB)",
+    "type": "DDR5",
+    "capacity": 16,
+    "speed": 5200,
+    "tier": 5,
+    "score": 60,
+    "priceUsd": 55
+  },
+  {
+    "id": "ddr5-5600-32gb",
+    "name": "DDR5 5600MHz 32GB (2×16GB)",
+    "type": "DDR5",
+    "capacity": 32,
+    "speed": 5600,
+    "tier": 6,
+    "score": 68,
+    "priceUsd": 90
+  },
+  {
+    "id": "ddr5-6000-32gb",
+    "name": "DDR5 6000MHz 32GB (2×16GB)",
+    "type": "DDR5",
+    "capacity": 32,
+    "speed": 6000,
+    "tier": 7,
+    "score": 75,
+    "priceUsd": 100
+  },
+  {
+    "id": "ddr5-6000-64gb",
+    "name": "DDR5 6000MHz 64GB (2×32GB)",
+    "type": "DDR5",
+    "capacity": 64,
+    "speed": 6000,
+    "tier": 8,
+    "score": 82,
+    "priceUsd": 190
+  },
+  {
+    "id": "ddr5-6400-32gb",
+    "name": "DDR5 6400MHz 32GB (2×16GB)",
+    "type": "DDR5",
+    "capacity": 32,
+    "speed": 6400,
+    "tier": 8,
+    "score": 80,
+    "priceUsd": 120
+  },
+  {
+    "id": "ddr4-2666-16gb",
+    "name": "DDR4 2666MHz 16GB (2×8GB)",
+    "type": "DDR4",
+    "capacity": 16,
+    "speed": 2666,
+    "tier": 3,
+    "score": 38,
+    "priceUsd": 35
+  },
+  {
+    "id": "ddr4-2666-8gb",
+    "name": "DDR4 2666MHz 8GB (2×4GB)",
+    "type": "DDR4",
+    "capacity": 8,
+    "speed": 2666,
+    "tier": 2,
+    "score": 28,
+    "priceUsd": 25
+  },
+  {
+    "id": "ddr5-4800-16gb",
+    "name": "DDR5 4800MHz 16GB (2×8GB)",
+    "type": "DDR5",
+    "capacity": 16,
+    "speed": 4800,
+    "tier": 4,
+    "score": 52,
+    "priceUsd": 50
+  }
+]

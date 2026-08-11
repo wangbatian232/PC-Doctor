@@ -1,0 +1,92 @@
+[
+  {
+    "id": "psu-550w-bronze",
+    "name": "550W 80+ Bronze",
+    "wattage": 550,
+    "rating": "80+ Bronze",
+    "tier": 3,
+    "score": 40,
+    "priceUsd": 50
+  },
+  {
+    "id": "psu-650w-bronze",
+    "name": "650W 80+ Bronze",
+    "wattage": 650,
+    "rating": "80+ Bronze",
+    "tier": 4,
+    "score": 50,
+    "priceUsd": 65
+  },
+  {
+    "id": "psu-650w-gold",
+    "name": "650W 80+ Gold",
+    "wattage": 650,
+    "rating": "80+ Gold",
+    "tier": 6,
+    "score": 65,
+    "priceUsd": 90
+  },
+  {
+    "id": "psu-750w-gold",
+    "name": "750W 80+ Gold",
+    "wattage": 750,
+    "rating": "80+ Gold",
+    "tier": 7,
+    "score": 75,
+    "priceUsd": 110
+  },
+  {
+    "id": "psu-850w-gold",
+    "name": "850W 80+ Gold",
+    "wattage": 850,
+    "rating": "80+ Gold",
+    "tier": 8,
+    "score": 82,
+    "priceUsd": 130
+  },
+  {
+    "id": "psu-1000w-gold",
+    "name": "1000W 80+ Gold",
+    "wattage": 1000,
+    "rating": "80+ Gold",
+    "tier": 9,
+    "score": 88,
+    "priceUsd": 170
+  },
+  {
+    "id": "psu-850w-platinum",
+    "name": "850W 80+ Platinum",
+    "wattage": 850,
+    "rating": "80+ Platinum",
+    "tier": 9,
+    "score": 88,
+    "priceUsd": 180
+  },
+  {
+    "id": "psu-1000w-platinum",
+    "name": "1000W 80+ Platinum",
+    "wattage": 1000,
+    "rating": "80+ Platinum",
+    "tier": 10,
+    "score": 95,
+    "priceUsd": 230
+  },
+  {
+    "id": "psu-450w-bronze",
+    "name": "450W 80+ Bronze",
+    "wattage": 450,
+    "rating": "80+ Bronze",
+    "tier": 2,
+    "score": 30,
+    "priceUsd": 40
+  },
+  {
+    "id": "psu-750w-bronze",
+    "name": "750W 80+ Bronze",
+    "wattage": 750,
+    "rating": "80+ Bronze",
+    "tier": 5,
+    "score": 58,
+    "priceUsd": 80
+  }
+]

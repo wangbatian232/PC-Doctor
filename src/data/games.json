@@ -1,0 +1,198 @@
+[
+  {
+    "id": "delta-force",
+    "name": "Delta Force",
+    "nameZh": "三角洲行动",
+    "genre": "FPS",
+    "cpuIntensive": 0.4,
+    "gpuIntensive": 0.7,
+    "fpsEstimates": {
+      "1080p": {
+        "low": { "tierMultiplier": 1.8, "vramBase": 3 },
+        "medium": { "tierMultiplier": 1.4, "vramBase": 4 },
+        "high": { "tierMultiplier": 1.05, "vramBase": 5 },
+        "ultra": { "tierMultiplier": 0.75, "vramBase": 6 }
+      },
+      "1440p": {
+        "low": { "tierMultiplier": 1.3, "vramBase": 4 },
+        "medium": { "tierMultiplier": 1.0, "vramBase": 5 },
+        "high": { "tierMultiplier": 0.75, "vramBase": 6 },
+        "ultra": { "tierMultiplier": 0.52, "vramBase": 8 }
+      },
+      "4k": {
+        "low": { "tierMultiplier": 0.8, "vramBase": 5 },
+        "medium": { "tierMultiplier": 0.6, "vramBase": 7 },
+        "high": { "tierMultiplier": 0.42, "vramBase": 9 },
+        "ultra": { "tierMultiplier": 0.28, "vramBase": 12 }
+      }
+    }
+  },
+  {
+    "id": "cs2",
+    "name": "CS2",
+    "nameZh": "CS2",
+    "genre": "FPS",
+    "cpuIntensive": 0.7,
+    "gpuIntensive": 0.5,
+    "fpsEstimates": {
+      "1080p": {
+        "low": { "tierMultiplier": 4.0, "vramBase": 2 },
+        "medium": { "tierMultiplier": 3.2, "vramBase": 2.5 },
+        "high": { "tierMultiplier": 2.5, "vramBase": 3 },
+        "ultra": { "tierMultiplier": 1.9, "vramBase": 4 }
+      },
+      "1440p": {
+        "low": { "tierMultiplier": 3.2, "vramBase": 2.5 },
+        "medium": { "tierMultiplier": 2.5, "vramBase": 3 },
+        "high": { "tierMultiplier": 1.9, "vramBase": 4 },
+        "ultra": { "tierMultiplier": 1.4, "vramBase": 5 }
+      },
+      "4k": {
+        "low": { "tierMultiplier": 2.0, "vramBase": 3 },
+        "medium": { "tierMultiplier": 1.5, "vramBase": 4 },
+        "high": { "tierMultiplier": 1.1, "vramBase": 5 },
+        "ultra": { "tierMultiplier": 0.8, "vramBase": 6 }
+      }
+    }
+  },
+  {
+    "id": "pubg",
+    "name": "PUBG",
+    "nameZh": "绝地求生",
+    "genre": "Battle Royale",
+    "cpuIntensive": 0.5,
+    "gpuIntensive": 0.6,
+    "fpsEstimates": {
+      "1080p": {
+        "low": { "tierMultiplier": 2.2, "vramBase": 3 },
+        "medium": { "tierMultiplier": 1.7, "vramBase": 4 },
+        "high": { "tierMultiplier": 1.3, "vramBase": 5 },
+        "ultra": { "tierMultiplier": 0.95, "vramBase": 6 }
+      },
+      "1440p": {
+        "low": { "tierMultiplier": 1.6, "vramBase": 4 },
+        "medium": { "tierMultiplier": 1.2, "vramBase": 5 },
+        "high": { "tierMultiplier": 0.9, "vramBase": 6 },
+        "ultra": { "tierMultiplier": 0.6, "vramBase": 8 }
+      },
+      "4k": {
+        "low": { "tierMultiplier": 1.0, "vramBase": 5 },
+        "medium": { "tierMultiplier": 0.7, "vramBase": 7 },
+        "high": { "tierMultiplier": 0.5, "vramBase": 9 },
+        "ultra": { "tierMultiplier": 0.35, "vramBase": 11 }
+      }
+    }
+  },
+  {
+    "id": "cyberpunk-2077",
+    "name": "Cyberpunk 2077",
+    "nameZh": "赛博朋克 2077",
+    "genre": "RPG",
+    "cpuIntensive": 0.5,
+    "gpuIntensive": 0.9,
+    "fpsEstimates": {
+      "1080p": {
+        "low": { "tierMultiplier": 1.5, "vramBase": 4 },
+        "medium": { "tierMultiplier": 1.1, "vramBase": 5 },
+        "high": { "tierMultiplier": 0.8, "vramBase": 7 },
+        "ultra": { "tierMultiplier": 0.5, "vramBase": 10 }
+      },
+      "1440p": {
+        "low": { "tierMultiplier": 1.0, "vramBase": 5 },
+        "medium": { "tierMultiplier": 0.7, "vramBase": 7 },
+        "high": { "tierMultiplier": 0.5, "vramBase": 9 },
+        "ultra": { "tierMultiplier": 0.3, "vramBase": 12 }
+      },
+      "4k": {
+        "low": { "tierMultiplier": 0.6, "vramBase": 7 },
+        "medium": { "tierMultiplier": 0.4, "vramBase": 9 },
+        "high": { "tierMultiplier": 0.25, "vramBase": 12 },
+        "ultra": { "tierMultiplier": 0.15, "vramBase": 16 }
+      }
+    }
+  },
+  {
+    "id": "black-myth-wukong",
+    "name": "Black Myth: Wukong",
+    "nameZh": "黑神话：悟空",
+    "genre": "Action RPG",
+    "cpuIntensive": 0.4,
+    "gpuIntensive": 0.85,
+    "fpsEstimates": {
+      "1080p": {
+        "low": { "tierMultiplier": 1.4, "vramBase": 4 },
+        "medium": { "tierMultiplier": 1.0, "vramBase": 5 },
+        "high": { "tierMultiplier": 0.7, "vramBase": 7 },
+        "ultra": { "tierMultiplier": 0.45, "vramBase": 10 }
+      },
+      "1440p": {
+        "low": { "tierMultiplier": 0.9, "vramBase": 5 },
+        "medium": { "tierMultiplier": 0.65, "vramBase": 7 },
+        "high": { "tierMultiplier": 0.45, "vramBase": 9 },
+        "ultra": { "tierMultiplier": 0.28, "vramBase": 12 }
+      },
+      "4k": {
+        "low": { "tierMultiplier": 0.55, "vramBase": 7 },
+        "medium": { "tierMultiplier": 0.38, "vramBase": 9 },
+        "high": { "tierMultiplier": 0.24, "vramBase": 12 },
+        "ultra": { "tierMultiplier": 0.14, "vramBase": 16 }
+      }
+    }
+  },
+  {
+    "id": "elden-ring",
+    "name": "Elden Ring",
+    "nameZh": "艾尔登法环",
+    "genre": "Action RPG",
+    "cpuIntensive": 0.35,
+    "gpuIntensive": 0.75,
+    "fpsEstimates": {
+      "1080p": {
+        "low": { "tierMultiplier": 1.6, "vramBase": 3 },
+        "medium": { "tierMultiplier": 1.2, "vramBase": 4 },
+        "high": { "tierMultiplier": 0.9, "vramBase": 5 },
+        "ultra": { "tierMultiplier": 0.7, "vramBase": 6 }
+      },
+      "1440p": {
+        "low": { "tierMultiplier": 1.1, "vramBase": 4 },
+        "medium": { "tierMultiplier": 0.8, "vramBase": 5 },
+        "high": { "tierMultiplier": 0.6, "vramBase": 6 },
+        "ultra": { "tierMultiplier": 0.45, "vramBase": 8 }
+      },
+      "4k": {
+        "low": { "tierMultiplier": 0.7, "vramBase": 5 },
+        "medium": { "tierMultiplier": 0.5, "vramBase": 6 },
+        "high": { "tierMultiplier": 0.35, "vramBase": 8 },
+        "ultra": { "tierMultiplier": 0.22, "vramBase": 10 }
+      }
+    }
+  },
+  {
+    "id": "genshin-impact",
+    "name": "Genshin Impact",
+    "nameZh": "原神",
+    "genre": "Open World RPG",
+    "cpuIntensive": 0.3,
+    "gpuIntensive": 0.6,
+    "fpsEstimates": {
+      "1080p": {
+        "low": { "tierMultiplier": 2.5, "vramBase": 2 },
+        "medium": { "tierMultiplier": 1.9, "vramBase": 3 },
+        "high": { "tierMultiplier": 1.4, "vramBase": 4 },
+        "ultra": { "tierMultiplier": 1.0, "vramBase": 5 }
+      },
+      "1440p": {
+        "low": { "tierMultiplier": 1.8, "vramBase": 3 },
+        "medium": { "tierMultiplier": 1.3, "vramBase": 4 },
+        "high": { "tierMultiplier": 0.95, "vramBase": 5 },
+        "ultra": { "tierMultiplier": 0.7, "vramBase": 6 }
+      },
+      "4k": {
+        "low": { "tierMultiplier": 1.2, "vramBase": 4 },
+        "medium": { "tierMultiplier": 0.85, "vramBase": 5 },
+        "high": { "tierMultiplier": 0.6, "vramBase": 6 },
+        "ultra": { "tierMultiplier": 0.4, "vramBase": 8 }
+      }
+    }
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "id": "sata-ssd-512gb",
+    "name": "SATA SSD 512GB",
+    "type": "SATA",
+    "capacity": 512,
+    "readSpeed": 550,
+    "writeSpeed": 500,
+    "tier": 3,
+    "score": 35,
+    "priceUsd": 30
+  },
+  {
+    "id": "sata-ssd-1tb",
+    "name": "SATA SSD 1TB",
+    "type": "SATA",
+    "capacity": 1024,
+    "readSpeed": 550,
+    "writeSpeed": 520,
+    "tier": 3,
+    "score": 40,
+    "priceUsd": 55
+  },
+  {
+    "id": "nvme-gen3-512gb",
+    "name": "NVMe Gen3 512GB",
+    "type": "NVMe Gen3",
+    "capacity": 512,
+    "readSpeed": 3500,
+    "writeSpeed": 2500,
+    "tier": 5,
+    "score": 55,
+    "priceUsd": 35
+  },
+  {
+    "id": "nvme-gen3-1tb",
+    "name": "NVMe Gen3 1TB",
+    "type": "NVMe Gen3",
+    "capacity": 1024,
+    "readSpeed": 3500,
+    "writeSpeed": 3000,
+    "tier": 5,
+    "score": 60,
+    "priceUsd": 55
+  },
+  {
+    "id": "nvme-gen4-1tb",
+    "name": "NVMe Gen4 1TB",
+    "type": "NVMe Gen4",
+    "capacity": 1024,
+    "readSpeed": 7000,
+    "writeSpeed": 5500,
+    "tier": 7,
+    "score": 75,
+    "priceUsd": 70
+  },
+  {
+    "id": "nvme-gen4-2tb",
+    "name": "NVMe Gen4 2TB",
+    "type": "NVMe Gen4",
+    "capacity": 2048,
+    "readSpeed": 7400,
+    "writeSpeed": 6900,
+    "tier": 8,
+    "score": 82,
+    "priceUsd": 130
+  },
+  {
+    "id": "nvme-gen5-1tb",
+    "name": "NVMe Gen5 1TB",
+    "type": "NVMe Gen5",
+    "capacity": 1024,
+    "readSpeed": 12000,
+    "writeSpeed": 10000,
+    "tier": 9,
+    "score": 88,
+    "priceUsd": 130
+  },
+  {
+    "id": "nvme-gen5-2tb",
+    "name": "NVMe Gen5 2TB",
+    "type": "NVMe Gen5",
+    "capacity": 2048,
+    "readSpeed": 14000,
+    "writeSpeed": 12000,
+    "tier": 10,
+    "score": 95,
+    "priceUsd": 250
+  },
+  {
+    "id": "nvme-gen4-512gb",
+    "name": "NVMe Gen4 512GB",
+    "type": "NVMe Gen4",
+    "capacity": 512,
+    "readSpeed": 5000,
+    "writeSpeed": 4000,
+    "tier": 6,
+    "score": 65,
+    "priceUsd": 45
+  },
+  {
+    "id": "nvme-gen3-256gb",
+    "name": "NVMe Gen3 256GB",
+    "type": "NVMe Gen3",
+    "capacity": 256,
+    "readSpeed": 3000,
+    "writeSpeed": 1500,
+    "tier": 4,
+    "score": 45,
+    "priceUsd": 25
+  }
+]
