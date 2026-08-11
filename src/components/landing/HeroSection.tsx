@@ -52,7 +52,7 @@ export default function HeroSection({ onStartDiagnosis, onViewExample }: HeroPro
           </p>
           <div className="flex gap-3">
             <motion.button onClick={onStartDiagnosis}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-[8px] bg-[var(--accent-green)] text-[var(--bg-void)] text-[15px] font-semibold hover:bg-[var(--accent-green-hover)] transition-colors group"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-[8px] border border-[rgba(53,208,127,0.35)] text-[var(--accent-green)] text-[15px] font-semibold hover:bg-[rgba(53,208,127,0.08)] hover:border-[rgba(53,208,127,0.5)] transition-all duration-200 group"
               whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               开始诊断 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </motion.button>

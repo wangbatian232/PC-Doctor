@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import AnimatedCounter from "./AnimatedCounter";
-import { FileCheck, TrendingUp } from "lucide-react";
+import { FileCheck, TrendingUp, ArrowRight } from "lucide-react";
 
 const reportItems = [
   { label: "综合健康", value: 91 }, { label: "CPU", value: 92 }, { label: "GPU", value: 71 },
@@ -71,8 +71,9 @@ export default function ReportShowcase({ onStartDiagnosis }: Props) {
                 <p className="t-body mt-2">建议优先升级显卡。当前 GPU 是系统中最明显的性能短板，升级后游戏帧率预计提升 <span className="text-[var(--accent-green)] font-semibold">+64%</span>。</p>
               </div>
               <button onClick={onStartDiagnosis}
-                className="w-full mt-6 py-3 rounded-[8px] bg-[var(--accent-green)] text-[var(--bg-void)] text-[14px] font-semibold hover:bg-[var(--accent-green-hover)] transition-colors">
+                className="w-full mt-6 py-3 rounded-[8px] border border-[rgba(53,208,127,0.35)] text-[var(--accent-green)] text-[14px] font-semibold hover:bg-[rgba(53,208,127,0.08)] hover:border-[rgba(53,208,127,0.5)] transition-all duration-200 flex items-center justify-center gap-2 group">
                 Start Your Diagnosis
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
               </button>
             </div>
           </motion.div>
