@@ -1,133 +1,119 @@
 "use client";
 
-import { motion } from "framer-motion";
-import FadingVideo from "@/components/shared/FadingVideo";
-import BlurText from "@/components/shared/BlurText";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Activity, ArrowRight, Eye, Cpu, Monitor, MemoryStick, HardDrive, Zap, ChevronDown } from "lucide-react";
+import AnimatedCounter from "./AnimatedCounter";
+import { useDashboardTilt } from "@/components/shared/BackgroundSystem";
 
-interface HeroProps { onStartDiagnosis: () => void; }
+interface HeroProps { onStartDiagnosis: () => void; onViewExample: () => void; }
 
-/* ── Custom SVG Icons ── */
-function ArrowUpRight() {
+function Bar({ icon, label, value, color, delay }: { icon: React.ReactNode; label: string; value: number; color: string; delay: number }) {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M7 17L17 7" /><path d="M7 7h10v10" />
-    </svg>
+    <motion.div className="flex items-center gap-3"
+      initial={{ opacity: 0, x: -4 }} animate={{ opacity: 1, x: 0 }}
+      transition={{ delay, duration: 0.45, ease: [0.22,1,0.36,1] }}>
+      <span className="text-[var(--text-tertiary)] w-3.5 shrink-0">{icon}</span>
+      <span className="t-label w-7 shrink-0">{label}</span>
+      <div className="flex-1 bar-track">
+        <motion.div className="bar-fill" style={{ background: color }}
+          initial={{ width: 0 }} animate={{ width: `${value}%` }}
+          transition={{ delay: delay + 0.18, duration: 0.7, ease: [0.22,1,0.36,1] }} />
+      </div>
+      <motion.span className="text-[13px] font-semibold text-[var(--text-primary)] w-7 text-right tabular-nums"
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: delay + 0.25 }}>
+        <AnimatedCounter to={value} duration={800} />
+      </motion.span>
+    </motion.div>
   );
 }
-function ClockIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" />
-    </svg>
-  );
-}
-function GlobeIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round">
-      <circle cx="12" cy="12" r="9" /><line x1="3" y1="12" x2="21" y2="12" />
-      <path d="M12 3a15 15 0 0 1 4 9 15 15 0 0 1-4 9" /><path d="M12 3a15 15 0 0 0-4 9 15 15 0 0 0 4 9" />
-    </svg>
-  );
-}
 
-const logos = ["Aeon", "Vela", "Apex", "Orbit", "Zeno"];
-
-export default function HeroSection({ onStartDiagnosis }: HeroProps) {
-  const initial = { filter: "blur(10px)", opacity: 0, y: 20 };
-  const animate = { filter: "blur(0px)", opacity: 1, y: 0 };
+export default function HeroSection({ onStartDiagnosis, onViewExample }: HeroProps) {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.2 });
+  const tilt = useDashboardTilt();
 
   return (
-    <section className="h-screen overflow-hidden bg-black relative">
-      {/* Background video */}
-      <FadingVideo
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260619_191346_9d19d66e-86a4-47f7-8dc6-712c1788c3b2.mp4"
-        className="absolute left-1/2 top-0 -translate-x-1/2 object-cover object-top z-0"
-        style={{ width: "120%", height: "120%" }}
-      />
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col h-full">
-        {/* Navbar */}
-        <nav className="fixed top-4 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-16">
-          <div className="liquid-glass h-11 w-11 rounded-full flex items-center justify-center">
-            <span className="font-heading italic text-xl">P</span>
+    <section ref={ref} className="section-hero page-container relative">
+      <div className="grid-12 items-center w-full">
+        {/* Left: Text — cols 1-6 */}
+        <motion.div className="col-span-12 lg:col-span-6 relative z-10 lg:pr-8"
+          initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: [0.22,1,0.36,1] }}>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-glass)] mb-6">
+            <Activity className="w-3 h-3 text-[var(--accent-green)]" />
+            <span className="t-label">电脑配置医生</span>
           </div>
-          <div className="hidden md:flex liquid-glass rounded-full px-1.5 py-1.5 items-center gap-0.5">
-            {["诊断", "瓶颈", "游戏", "升级", "报告"].map((l) => (
-              <button key={l} className="px-3 py-2 text-sm font-medium text-white/90 font-body hover:text-white transition-colors">
-                {l}
-              </button>
-            ))}
-            <button onClick={onStartDiagnosis} className="ml-1 px-3 py-2 rounded-full bg-white text-black text-sm font-medium font-body flex items-center gap-1 hover:bg-gray-200 transition-colors">
-              开始诊断 <ArrowUpRight />
-            </button>
+          <h1 className="t-hero text-[var(--text-primary)] mb-5">
+            让你的电脑配置，<br /><span className="text-[var(--accent-green)]">一眼看懂。</span>
+          </h1>
+          <p className="t-body max-w-[440px] mb-8">
+            输入你的 CPU、GPU、内存和其他硬件，PC Doctor 会分析性能、瓶颈、游戏表现和升级优先级。
+          </p>
+          <div className="flex gap-3">
+            <motion.button onClick={onStartDiagnosis}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-[8px] border border-[rgba(53,208,127,0.35)] text-[var(--accent-green)] text-[15px] font-semibold hover:bg-[rgba(53,208,127,0.08)] hover:border-[rgba(53,208,127,0.5)] transition-all duration-200 group"
+              whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              开始诊断 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </motion.button>
+            <motion.button onClick={onViewExample}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-[8px] border border-[var(--border-default)] text-[var(--text-secondary)] text-[15px] font-medium hover:text-[var(--text-primary)] hover:border-[var(--border-visible)] transition-colors"
+              whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              查看示例 <Eye className="w-4 h-4" />
+            </motion.button>
           </div>
-          <div className="h-11 w-11" />
-        </nav>
+        </motion.div>
 
-        {/* Main */}
-        <div className="flex-1 flex flex-col items-center justify-center pt-24 px-4 text-center">
-          {/* Badge */}
-          <motion.div initial={initial} animate={animate} transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}>
-            <div className="liquid-glass rounded-full px-4 py-1.5 inline-flex items-center gap-2">
-              <span className="bg-white text-black text-[10px] font-medium px-2 py-0.5 rounded-full font-body">NEW</span>
-              <span className="text-sm text-white/80 font-body">Free diagnostic tool — no signup required</span>
+        {/* Right: Dashboard — cols 8-12 */}
+        <motion.div className="col-span-12 lg:col-span-5 lg:col-start-8 relative z-10 mt-10 lg:mt-0"
+          initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.55, delay: 0.15, ease: [0.22,1,0.36,1] }}>
+          <div className="glass p-[clamp(24px,3vw,40px)] relative overflow-hidden" style={tilt}>
+            <div className="flex items-center gap-2 mb-5">
+              <Activity className="w-3.5 h-3.5 text-[var(--accent-green)]" />
+              <span className="t-label">PC HEALTH</span>
             </div>
-          </motion.div>
-
-          {/* Headline */}
-          <div className="mt-6 max-w-3xl">
-            <BlurText
-              text="Crafted Digital Experiences Built to Outlast Trends"
-              className="text-5xl md:text-6xl lg:text-[5rem] font-heading italic text-white leading-[0.8] tracking-[-3px]"
-              delay={0.5}
-            />
-          </div>
-
-          {/* Subtext */}
-          <motion.p initial={initial} animate={animate} transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
-            className="text-sm md:text-base text-white/80 max-w-2xl mt-4 font-body font-light leading-tight px-4">
-            We are a small studio of designers and engineers shaping brand-defining websites for ambitious companies. Precise typography, cinematic motion, and code you can be proud of.
-          </motion.p>
-
-          {/* CTA buttons */}
-          <motion.div initial={initial} animate={animate} transition={{ delay: 1.1, duration: 0.8, ease: "easeOut" }}
-            className="mt-6 flex items-center gap-6">
-            <button onClick={onStartDiagnosis}
-              className="liquid-glass-strong rounded-full px-6 py-3 text-white font-body font-medium flex items-center gap-2 hover:bg-white/5 transition-colors">
-              开始诊断 <ArrowUpRight />
-            </button>
-          </motion.div>
-
-          {/* Stats cards */}
-          <motion.div initial={initial} animate={animate} transition={{ delay: 1.3, duration: 0.8, ease: "easeOut" }}
-            className="mt-8 flex flex-col sm:flex-row gap-4">
-            <div className="liquid-glass p-5 w-[220px] rounded-[1.25rem]">
-              <ClockIcon />
-              <p className="text-4xl font-heading italic tracking-[-1px] leading-none mt-4">6 Weeks</p>
-              <p className="text-xs text-white/70 font-body font-light mt-1">Average End-to-End Launch Time</p>
+            <div className="flex items-baseline gap-1.5 mb-1">
+              <motion.div className="t-number text-[var(--text-primary)] tabular-nums"
+                initial={{ opacity: 0, scale: 0.7 }} animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: 0.25, duration: 0.5, ease: [0.34,1.56,0.64,1] }}>
+                <AnimatedCounter to={87} duration={1600} />
+              </motion.div>
+              <span className="text-[15px] text-[var(--text-tertiary)]">/100</span>
             </div>
-            <div className="liquid-glass p-5 w-[220px] rounded-[1.25rem]">
-              <GlobeIcon />
-              <p className="text-4xl font-heading italic tracking-[-1px] leading-none mt-4">140+</p>
-              <p className="text-xs text-white/70 font-body font-light mt-1">Brands Shipped Across Four Continents</p>
+            <motion.p className="t-label text-[var(--accent-green)] font-semibold mb-6"
+              initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.5 }}>
+              EXCELLENT
+            </motion.p>
+            <div className="h-px bg-[var(--border-subtle)] mb-6" />
+            <div className="space-y-4">
+              <Bar icon={<Cpu className="w-3 h-3" />} label="CPU" value={92} color="#35D07F" delay={0.4} />
+              <Bar icon={<Monitor className="w-3 h-3" />} label="GPU" value={89} color="#35D07F" delay={0.5} />
+              <Bar icon={<MemoryStick className="w-3 h-3" />} label="RAM" value={82} color="#35D07F" delay={0.6} />
+              <Bar icon={<HardDrive className="w-3 h-3" />} label="SSD" value={76} color="#F5B942" delay={0.7} />
+              <Bar icon={<Zap className="w-3 h-3" />} label="PSU" value={91} color="#35D07F" delay={0.8} />
             </div>
-          </motion.div>
-        </div>
-
-        {/* Bottom trust bar */}
-        <motion.div initial={initial} animate={animate} transition={{ delay: 1.4, duration: 0.8, ease: "easeOut" }}
-          className="flex flex-col items-center gap-4 pb-8">
-          <div className="liquid-glass rounded-full px-6 py-2.5">
-            <span className="text-sm text-white/80 font-body">Trusted by founders, operators, and creative directors worldwide</span>
-          </div>
-          <div className="flex gap-10 md:gap-14">
-            {logos.map((l) => (
-              <span key={l} className="font-heading italic text-2xl md:text-3xl tracking-tight text-white/60">{l}</span>
-            ))}
+            <div className="mt-6 pt-5 border-t border-[var(--border-subtle)] flex justify-between items-center">
+              <span className="t-label">BALANCE</span>
+              <motion.span className="text-[22px] font-bold text-[var(--accent-green)] tabular-nums"
+                initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.9 }}>
+                <AnimatedCounter to={94} duration={900} suffix="%" />
+              </motion.span>
+            </div>
           </div>
         </motion.div>
       </div>
+
+      {/* Scroll hint */}
+      <motion.button
+        onClick={() => document.getElementById("ch02")?.scrollIntoView({ behavior: "smooth" })}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors z-10"
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.3 }}>
+        <span className="t-mono">01 / 06</span>
+        <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+          <ChevronDown className="w-3.5 h-3.5" />
+        </motion.div>
+      </motion.button>
     </section>
   );
 }

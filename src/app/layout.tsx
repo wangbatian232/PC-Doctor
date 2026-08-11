@@ -9,12 +9,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="zh-CN">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
-      </head>
-      <body className="bg-black text-white antialiased min-h-svh overflow-x-hidden font-body">
+      <body className="bg-[var(--bg-void)] text-[var(--text-primary)] antialiased min-h-svh overflow-x-hidden">
         {children}
       </body>
     </html>

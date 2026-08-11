@@ -13,8 +13,15 @@ import { cpus, gpus, rams } from "@/data";
 
 import CursorProvider from "@/components/shared/CursorProvider";
 import BackgroundSystem from "@/components/shared/BackgroundSystem";
+import Navbar from "@/components/landing/Navbar";
 import HeroSection from "@/components/landing/HeroSection";
-import Capabilities from "@/components/landing/Capabilities";
+import FeatureGrid from "@/components/landing/FeatureGrid";
+import ProductDemo from "@/components/landing/ProductDemo";
+import BottleneckShowcase from "@/components/landing/BottleneckShowcase";
+import GameShowcase from "@/components/landing/GameShowcase";
+import UpgradeShowcase from "@/components/landing/UpgradeShowcase";
+import ReportShowcase from "@/components/landing/ReportShowcase";
+import CTASection from "@/components/landing/CTASection";
 import Footer from "@/components/landing/Footer";
 
 import StepIndicator from "@/components/diagnosis/StepIndicator";
@@ -79,9 +86,17 @@ export default function Home() {
   if (view === "home") {
     return (
       <CursorProvider>
-        <main className="bg-black relative">
-          <HeroSection onStartDiagnosis={sd} />
-          <Capabilities />
+        <main className="bg-void relative">
+          <BackgroundSystem revealImage="/images/bg-reveal.jpg" />
+          <Navbar onStartDiagnosis={sd} />
+          <HeroSection onStartDiagnosis={sd} onViewExample={le} />
+          <FeatureGrid />
+          <ProductDemo />
+          <BottleneckShowcase />
+          <GameShowcase />
+          <UpgradeShowcase />
+          <ReportShowcase onStartDiagnosis={sd} />
+          <CTASection onStartDiagnosis={sd} />
           <Footer />
           <AnimatePresence>{showTop && (
             <motion.button className="scroll-top-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

@@ -1,90 +1,176 @@
 @import "tailwindcss";
 
 /* ══════════════════════════════════════════
-   PC Doctor — Liquid Glass Design System
+   PC Doctor — Layout System v4
+   Linear-inspired page architecture
    ══════════════════════════════════════════ */
 
 :root {
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  /* ── Surface ── */
+  --bg-void: #07090C;
+  --bg-panel: #0B0E13;
+  --bg-card: #10141A;
+  --bg-glass: rgba(255,255,255,0.025);
+
+  /* ── Borders ── */
+  --border-subtle: rgba(255,255,255,0.05);
+  --border-default: rgba(255,255,255,0.08);
+
+  /* ── Typography ── */
+  --text-primary: #F2F4F7;
+  --text-secondary: #8B929E;
+  --text-tertiary: #5E646D;
+  --text-placeholder: #434850;
+
+  /* ── Accent ── */
+  --accent-green: #35D07F;
+  --accent-green-hover: #2DB86E;
+  --accent-green-dim: rgba(53,208,127,0.08);
+  --accent-green-glow: rgba(53,208,127,0.10);
+
+  /* ── Status ── */
+  --status-warning: #F5B942;
+  --status-danger: #FF5C5C;
+
+  /* ── Cursor (injected by CursorProvider) ── */
+  --cursor-x: 0.5;
+  --cursor-y: 0.5;
+  --cursor-nx: 0;
+  --cursor-ny: 0;
+  --cursor-active: 0;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; background: #000; }
-body { background: #000; color: #fff; line-height: 1.5; overflow-x: hidden; }
-::selection { background: rgba(255,255,255,0.12); }
+/* ══════════════════════════════════════════
+   RESET
+   ══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; background: var(--bg-void); }
+body {
+  background: var(--bg-void); color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-feature-settings: "cv01","ss03"; min-height: 100svh; line-height: 1.5; overflow-x: hidden;
+}
+*:focus-visible { outline: none; box-shadow: 0 0 0 1px var(--bg-void), 0 0 0 3px rgba(255,255,255,0.18); border-radius: 4px; }
+::selection { background: var(--accent-green-dim); color: var(--text-primary); }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 2px; }
 
 /* ══════════════════════════════════════════
-   LIQUID GLASS
+   PAGE CONTAINER
+   Linear pattern: background=100vw, content=capped
    ══════════════════════════════════════════ */
-.liquid-glass {
-  background: rgba(255,255,255,0.01);
-  background-blend-mode: luminosity;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
-  position: relative;
-  overflow: hidden;
-}
-.liquid-glass::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.4px;
-  background: linear-gradient(180deg,
-    rgba(255,255,255,0.45) 0%,
-    rgba(255,255,255,0.15) 20%,
-    rgba(255,255,255,0) 40%,
-    rgba(255,255,255,0) 60%,
-    rgba(255,255,255,0.15) 80%,
-    rgba(255,255,255,0.45) 100%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+.page-container {
+  width: min(calc(100% - clamp(64px, 8vw, 160px)), 1280px);
+  margin-inline: auto;
 }
 
-.liquid-glass-strong {
-  background: rgba(255,255,255,0.01);
-  background-blend-mode: luminosity;
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
-  box-shadow: 4px 4px 4px rgba(0,0,0,0.05), inset 0 1px 1px rgba(255,255,255,0.15);
-  position: relative;
-  overflow: hidden;
-}
-.liquid-glass-strong::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.4px;
-  background: linear-gradient(180deg,
-    rgba(255,255,255,0.5) 0%,
-    rgba(255,255,255,0.2) 20%,
-    rgba(255,255,255,0) 40%,
-    rgba(255,255,255,0) 60%,
-    rgba(255,255,255,0.2) 80%,
-    rgba(255,255,255,0.5) 100%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+/* ── 12-column grid for section layouts ── */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: clamp(20px, 2.5vw, 40px);
 }
 
 /* ══════════════════════════════════════════
-   SCROLL-TO-TOP
+   SECTION RHYTHM
+   ══════════════════════════════════════════ */
+.section-hero {
+  min-height: 100svh;
+  display: flex; align-items: center;
+  padding-block: clamp(60px, 6vw, 100px);
+}
+.section-chapter {
+  min-height: 90svh;
+  display: flex; align-items: center;
+  padding-block: clamp(80px, 10vw, 160px);
+}
+.section-cta {
+  min-height: 70svh;
+  display: flex; align-items: center;
+  padding-block: clamp(80px, 10vw, 140px);
+}
+
+/* ── Section background alternation ── */
+.bg-void   { background: var(--bg-void); }
+.bg-panel  { background: var(--bg-panel); }
+
+/* ══════════════════════════════════════════
+   TYPOGRAPHY SCALE
+   ══════════════════════════════════════════ */
+.t-hero {
+  font-size: clamp(44px, 5.5vw, 84px);
+  font-weight: 700; letter-spacing: -0.04em; line-height: 1.05;
+}
+.t-section {
+  font-size: clamp(36px, 4vw, 64px);
+  font-weight: 600; letter-spacing: -0.03em; line-height: 1.1;
+}
+.t-heading {
+  font-size: clamp(20px, 1.6vw, 28px);
+  font-weight: 600; letter-spacing: -0.02em;
+}
+.t-body {
+  font-size: clamp(15px, 1.05vw, 18px);
+  color: var(--text-secondary); line-height: 1.6;
+}
+.t-label {
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-tertiary); font-weight: 500;
+}
+.t-number {
+  font-size: clamp(48px, 6vw, 96px);
+  font-weight: 700; letter-spacing: -0.05em; line-height: 1;
+}
+.t-mono {
+  font-family: 'SF Mono','JetBrains Mono','Fira Code',monospace;
+  font-size: clamp(10px, 0.65vw, 12px);
+}
+
+/* ══════════════════════════════════════════
+   GLASS CARD
+   ══════════════════════════════════════════ */
+.glass {
+  background: rgba(255,255,255,0.025);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+.glass::before {
+  content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background: radial-gradient(ellipse at 50% 0%, rgba(53,208,127,0.03), transparent 60%);
+}
+
+/* ── Dashboard bars ── */
+.bar-track { height: 2px; border-radius: 1px; background: rgba(255,255,255,0.05); overflow: hidden; }
+.bar-fill  { height: 100%; border-radius: 1px; transition: width 1s cubic-bezier(0.16,1,0.3,1); }
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════════════════ */
+@keyframes scan-line { 0%{top:-5%} 100%{top:105%} }
+@keyframes float-slow { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,-15px)} }
+@keyframes pulse-subtle { 0%,100%{opacity:0.6} 50%{opacity:1} }
+
+/* ══════════════════════════════════════════
+   SCROLL-TO-TOP + MOBILE NAV
    ══════════════════════════════════════════ */
 .scroll-top-btn {
-  position: fixed; bottom: 24px; right: 24px; z-index: 50;
-  width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-  color: #aaa; display: flex; align-items: center; justify-content: center;
-  cursor: pointer; backdrop-filter: blur(12px); transition: all 0.2s ease;
+  position:fixed; bottom:24px; right:24px; z-index:50;
+  width:40px; height:40px; border-radius:50%;
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+  color:var(--text-tertiary); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; backdrop-filter:blur(12px);
+  transition:all 0.2s ease;
 }
-.scroll-top-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.scroll-top-btn:hover { background:rgba(255,255,255,0.08); color:var(--text-primary); }
+
+@keyframes slide-in-right { from{transform:translateX(100%)} to{transform:translateX(0)} }
+
+/* ── Recharts ── */
+.recharts-text { fill: var(--text-secondary) !important; font-size: 10px !important; }
+.recharts-polar-grid-angle line,
+.recharts-polar-grid-concentric line { stroke: rgba(255,255,255,0.04) !important; }
+.recharts-radar-polygon { stroke: rgba(53,208,127,0.2) !important; fill: rgba(53,208,127,0.04) !important; }
