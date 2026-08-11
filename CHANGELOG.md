@@ -6,13 +6,17 @@ All notable changes to PC Doctor will be documented in this file.
 
 ## [Unreleased]
 
-### Added
-
 ### Changed
 
-### Fixed
+- Unified all navigation and CTA buttons to border+arrow typography style
+- Replaced Navbar colored link backgrounds with underline-on-hover + numbered entries
+- Converted all solid green CTA buttons (Hero, CTA Section, Report) to border+accent text style
+- Established unified Interactive Navigation Language across landing page
 
 ### Improved
+
+- Navbar hover feedback with animated underline indicator
+- CTA buttons now have consistent arrow transition on hover
 
 ---
 
