@@ -111,16 +111,28 @@ export default function Home() {
   const trans = gt(prevView, view);
   return (
     <CursorProvider>
-      <main className="min-h-screen bg-void">
+      <main className="min-h-screen bg-void relative">
+        <BackgroundSystem />
         <nav className="fixed top-0 left-0 right-0 z-40 bg-[rgba(7,9,12,0.88)] backdrop-blur-xl border-b border-[var(--border-subtle)]">
           <div className="page-container h-14 flex items-center justify-between">
-            <button onClick={() => { reset(); cv("home"); }} className="flex items-center gap-2 text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"><ArrowLeft className="w-4 h-4" /><span className="hidden sm:inline">PC DOCTOR</span></button>
-            {view === "results" && <button onClick={() => { reset(); sd(); }} className="flex items-center gap-2 text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"><RotateCcw className="w-4 h-4" /><span className="hidden sm:inline">重新诊断</span></button>}
+            <button onClick={() => { reset(); cv("home"); }}
+              className="flex items-center gap-2 text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors duration-200 group">
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+              <span className="hidden sm:inline font-medium">PC DOCTOR</span>
+            </button>
+            {view === "results" && (
+              <button onClick={() => { reset(); sd(); }}
+                className="flex items-center gap-2 text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors duration-200">
+                <RotateCcw className="w-4 h-4" />
+                <span className="hidden sm:inline">重新诊断</span>
+              </button>
+            )}
           </div>
         </nav>
         <AnimatePresence mode="wait">
           {view === "diagnosis" && (
-            <motion.div key="d" className="pt-24 pb-16 page-container" initial={trans.initial} animate={trans.animate} exit={trans.exit} transition={trans.transition}>
+            <motion.div key="d" className="pt-24 pb-20 page-container relative z-10"
+              initial={trans.initial} animate={trans.animate} exit={trans.exit} transition={trans.transition}>
               <StepIndicator currentStep={step} />
               <div className="min-h-[50svh] flex items-center justify-center">
                 <AnimatePresence mode="wait">
@@ -134,14 +146,54 @@ export default function Home() {
                 </AnimatePresence>
               </div>
               <div className="flex justify-between mt-8 max-w-lg mx-auto">
-                <button onClick={() => setStep(Math.max(0, step - 1))} className={`px-4 py-2.5 rounded-[6px] text-[13px] ${step === 0 ? "invisible" : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)]"}`}>上一步</button>
-                {step < 6 ? <button onClick={() => setStep(step + 1)} disabled={!(step === 0 ? usage.length > 0 : step === 1 ? cpu !== null : step === 6 ? monitor !== null : true)} className="px-6 py-2.5 rounded-[6px] bg-[var(--text-primary)] text-[var(--bg-void)] text-[13px] font-semibold hover:bg-[#d0d3d6] disabled:opacity-30">下一步</button>
-                  : <button onClick={() => { const sel: HardwareSelection = { cpu, gpu, ram, ssd, psu, monitor, usage }; const s = computeScores(sel); const b = analyzeBottleneck(sel); setResult({ scores: s, bottleneck: b, gamePredictions: predictAllGames(sel), upgrades: generateUpgradeSuggestions(sel), summary: scoreLabel(s.overall), selection: sel }); cv("scanning"); }} disabled={!monitor} className="px-6 py-2.5 rounded-[6px] bg-[var(--accent-green)] text-[var(--bg-void)] text-[13px] font-semibold hover:bg-[var(--accent-green-hover)] disabled:opacity-30">开始诊断</button>}
+                <button onClick={() => setStep(Math.max(0, step - 1))}
+                  className={`px-5 py-2.5 rounded-[8px] text-[13px] font-medium transition-all duration-200
+                    ${step === 0
+                      ? "invisible"
+                      : "border border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-visible)]"}`}>
+                  上一步
+                </button>
+                {step < 6 ? (
+                  <button onClick={() => setStep(step + 1)}
+                    disabled={!(step === 0 ? usage.length > 0 : step === 1 ? cpu !== null : step === 6 ? monitor !== null : true)}
+                    className="px-6 py-2.5 rounded-[8px] text-[13px] font-semibold transition-all duration-200
+                      border border-[rgba(255,255,255,0.15)] text-[var(--text-primary)] hover:border-[var(--border-visible)] hover:bg-[rgba(255,255,255,0.04)] active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed">
+                    下一步
+                  </button>
+                ) : (
+                  <button onClick={() => { const sel: HardwareSelection = { cpu, gpu, ram, ssd, psu, monitor, usage }; const s = computeScores(sel); const b = analyzeBottleneck(sel); setResult({ scores: s, bottleneck: b, gamePredictions: predictAllGames(sel), upgrades: generateUpgradeSuggestions(sel), summary: scoreLabel(s.overall), selection: sel }); cv("scanning"); }}
+                    disabled={!monitor}
+                    className="px-6 py-2.5 rounded-[8px] text-[13px] font-semibold transition-all duration-200
+                      border border-[rgba(53,208,127,0.35)] text-[var(--accent-green)] hover:bg-[rgba(53,208,127,0.08)] hover:border-[rgba(53,208,127,0.5)] active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2">
+                    开始诊断 →
+                  </button>
+                )}
               </div>
             </motion.div>
           )}
-          {view === "scanning" && <motion.div key="s" initial={trans.initial} animate={trans.animate} exit={trans.exit} transition={trans.transition}><ScanAnimation onComplete={() => cv("results")} /></motion.div>}
-          {view === "results" && result && <motion.div key="r" className="pt-24 pb-16 page-container" initial={trans.initial} animate={trans.animate} exit={trans.exit} transition={trans.transition}><div style={{ maxWidth: "1000px", margin: "0 auto" }}><HealthScore score={result.scores.overall} summary={result.summary} /><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8"><HardwareCard label="CPU" score={result.scores.cpu} icon={<span>CPU</span>} detail={result.selection.cpu ? <div><p>{result.selection.cpu.name}</p></div> : undefined} /><HardwareCard label="显卡" score={result.scores.gpu} icon={<span>GPU</span>} detail={result.selection.gpu ? <div><p>{result.selection.gpu.name}</p></div> : undefined} /><HardwareCard label="内存" score={result.scores.ram} icon={<span>RAM</span>} /><HardwareCard label="硬盘" score={result.scores.ssd} icon={<span>SSD</span>} /><HardwareCard label="电源" score={result.scores.psu} icon={<span>PSU</span>} /></div><div className="grid md:grid-cols-2 gap-6 mb-8"><RadarChart scores={result.scores} /><BottleneckAnalysis bottleneck={result.bottleneck} selection={result.selection} /></div><GamePerformance selection={result.selection} /><div className="mt-8"><UpgradeSuggestions upgrades={result.upgrades} /></div>{result.selection.gpu && <div className="mt-8"><UpgradeSimulator currentGpu={result.selection.gpu} /></div>}</div></motion.div>}
+          {view === "scanning" && (
+            <motion.div key="s" className="relative z-10" initial={trans.initial} animate={trans.animate} exit={trans.exit} transition={trans.transition}>
+              <ScanAnimation onComplete={() => cv("results")} />
+            </motion.div>
+          )}
+          {view === "results" && result && (
+            <motion.div key="r" className="pt-24 pb-20 page-container relative z-10" initial={trans.initial} animate={trans.animate} exit={trans.exit} transition={trans.transition}>
+              <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+                <HealthScore score={result.scores.overall} summary={result.summary} />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+                  <HardwareCard label="CPU" score={result.scores.cpu} icon={<span>CPU</span>} detail={result.selection.cpu ? <div><p>{result.selection.cpu.name}</p></div> : undefined} />
+                  <HardwareCard label="显卡" score={result.scores.gpu} icon={<span>GPU</span>} detail={result.selection.gpu ? <div><p>{result.selection.gpu.name}</p></div> : undefined} />
+                  <HardwareCard label="内存" score={result.scores.ram} icon={<span>RAM</span>} />
+                  <HardwareCard label="硬盘" score={result.scores.ssd} icon={<span>SSD</span>} />
+                  <HardwareCard label="电源" score={result.scores.psu} icon={<span>PSU</span>} />
+                </div>
+                <div className="grid md:grid-cols-2 gap-6 mb-8"><RadarChart scores={result.scores} /><BottleneckAnalysis bottleneck={result.bottleneck} selection={result.selection} /></div>
+                <div className="mb-8"><GamePerformance selection={result.selection} /></div>
+                <div className="mb-8"><UpgradeSuggestions upgrades={result.upgrades} /></div>
+                {result.selection.gpu && <div className="mb-8"><UpgradeSimulator currentGpu={result.selection.gpu} /></div>}
+              </div>
+            </motion.div>
+          )}
         </AnimatePresence>
       </main>
     </CursorProvider>
